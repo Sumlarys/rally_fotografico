@@ -1,110 +1,155 @@
 import 'package:flutter/material.dart';
-import '../services/auth_service.dart';
-import 'signup_screen.dart';
-import 'home_screen.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import '../widgets/background.dart';
+import '../widgets/custom_button.dart';
+import '../services/auth_service.dart';
+import 'auth_wrapper.dart';
+import 'forgot_password_screen.dart';
+import 'signup_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
-
   @override
   State<LoginScreen> createState() => _LoginScreenState();
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final AuthService _authService = AuthService();
+  final _formKey = GlobalKey<FormState>();
   final _emailCtrl = TextEditingController();
-  final _passwordCtrl = TextEditingController();
-  String _errorMessage = '';
-  bool _loading = false;
+  final _passCtrl = TextEditingController();
 
-  Future<void> _login() async {
+  bool _loading = false, _valid = false;
+  String? _error;
+
+  void _check() {
+    final ok = _formKey.currentState?.validate() ?? false;
+    if (ok != _valid) setState(() => _valid = ok);
+  }
+
+  Future<void> _submit() async {
+    if (!_valid) return;
     setState(() {
       _loading = true;
-      _errorMessage = '';
+      _error = null;
     });
     try {
-      final AuthResponse res = await _authService.signIn(
-        _emailCtrl.text.trim(),
-        _passwordCtrl.text.trim(),
-      );
-      final user = res.user;
-      if (user != null) {
+      final res = await AuthService()
+          .signIn(_emailCtrl.text.trim(), _passCtrl.text.trim());
+      if (res.user != null) {
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (_) => const HomeScreen()),
+          MaterialPageRoute(builder: (_) => const AuthWrapper()),
         );
       } else {
-        setState(() {
-          _errorMessage = 'Login failed: no user returned.';
-        });
+        setState(() => _error = 'Credenciales incorrectas');
       }
     } on AuthException catch (e) {
-      setState(() {
-        _errorMessage = e.message;
-      });
-    } catch (e) {
-      setState(() {
-        _errorMessage = 'Unexpected error: $e';
-      });
+      setState(() => _error = e.message);
+    } catch (_) {
+      setState(() => _error = 'Error inesperado');
     } finally {
-      setState(() {
-        _loading = false;
-      });
+      setState(() => _loading = false);
     }
   }
 
   @override
+  void initState() {
+    super.initState();
+    _emailCtrl.addListener(_check);
+    _passCtrl.addListener(_check);
+  }
+
+  @override
   void dispose() {
+    _emailCtrl.removeListener(_check);
+    _passCtrl.removeListener(_check);
     _emailCtrl.dispose();
-    _passwordCtrl.dispose();
+    _passCtrl.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    final t = Theme.of(context);
     return Scaffold(
-      appBar: AppBar(title: const Text('Login')),
-      body: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          children: [
-            TextField(
-              controller: _emailCtrl,
-              decoration: const InputDecoration(labelText: 'Email'),
-              keyboardType: TextInputType.emailAddress,
+      body: Background(
+        child: Center(
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.symmetric(horizontal: 32),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                const SizedBox(height: 48),
+                Text(
+                  'Rally Fotográfico',
+                  textAlign: TextAlign.center,
+                  style: t.textTheme.titleLarge?.copyWith(
+                    fontSize: 32,
+                    fontWeight: FontWeight.bold,
+                    color: t.colorScheme.primary,
+                  ),
+                ),
+                const SizedBox(height: 48),
+                Form(
+                  key: _formKey,
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  child: Column(children: [
+                    TextFormField(
+                      controller: _emailCtrl,
+                      decoration: const InputDecoration(labelText: 'Email'),
+                      keyboardType: TextInputType.emailAddress,
+                      validator: (v) =>
+                          v != null && v.contains('@') ? null : 'Email inválido',
+                    ),
+                    const SizedBox(height: 16),
+                    TextFormField(
+                      controller: _passCtrl,
+                      decoration:
+                          const InputDecoration(labelText: 'Contraseña'),
+                      obscureText: true,
+                      validator: (v) =>
+                          v != null && v.length >= 6 ? null : 'Mín. 6 caracteres',
+                    ),
+                    const SizedBox(height: 24),
+                    if (_error != null)
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 12),
+                        child: Text(
+                          _error!,
+                          style: TextStyle(color: t.colorScheme.error),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    CustomButton(
+                      label: 'Iniciar Sesión',
+                      loading: _loading,
+                      onPressed:
+                          (_valid && !_loading) ? () => _submit() : null,
+                    ),
+                    const SizedBox(height: 16),
+                    TextButton(
+                      onPressed: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (_) => const ForgotPasswordScreen()),
+                      ),
+                      child: const Text('¿Olvidaste tu contraseña?'),
+                    ),
+                    const SizedBox(height: 8),
+                    TextButton(
+                      onPressed: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (_) => const SignupScreen()),
+                      ),
+                      child: const Text('¿No tienes cuenta? Regístrate'),
+                    ),
+                    const SizedBox(height: 32),
+                  ]),
+                ),
+              ],
             ),
-            const SizedBox(height: 12),
-            TextField(
-              controller: _passwordCtrl,
-              decoration: const InputDecoration(labelText: 'Password'),
-              obscureText: true,
-            ),
-            const SizedBox(height: 24),
-            if (_loading)
-              const CircularProgressIndicator()
-            else
-              ElevatedButton(
-                onPressed: _login,
-                child: const Text('Login'),
-              ),
-            const SizedBox(height: 12),
-            TextButton(
-              onPressed: () => Navigator.push(
-                context,
-                MaterialPageRoute(builder: (_) => const SignupScreen()),
-              ),
-              child: const Text("Don't have an account? Sign up"),
-            ),
-            if (_errorMessage.isNotEmpty) ...[
-              const SizedBox(height: 12),
-              Text(
-                _errorMessage,
-                style: const TextStyle(color: Colors.red),
-                textAlign: TextAlign.center,
-              ),
-            ],
-          ],
+          ),
         ),
       ),
     );
