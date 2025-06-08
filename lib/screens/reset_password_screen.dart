@@ -1,4 +1,3 @@
-// lib/screens/reset_password_screen.dart
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -73,7 +72,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
           ),
           centerTitle: true,
         ),
-        body: Center( // Centra todos los componentes verticalmente
+        body: Center( 
           child: Padding(
             padding: const EdgeInsets.all(16.0),
             child: SingleChildScrollView(
@@ -81,10 +80,10 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                 mainAxisAlignment: MainAxisAlignment.center, // Centra los elementos dentro del Column
                 children: [
                   Text(
-                    'Ingrese su email', // Texto actualizado
+                    'Ingrese su email', 
                     style: GoogleFonts.pacifico(
-                      fontSize: 28, // Tamaño igual al del encabezado
-                      color: const Color(0xFFAB47BC), // Morado claro
+                      fontSize: 28, 
+                      color: const Color(0xFFAB47BC), 
                     ),
                     textAlign: TextAlign.center,
                   ),
@@ -100,11 +99,11 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                       errorText: _emailError,
                       hintStyle: GoogleFonts.lato(
                         fontSize: 16,
-                        color: const Color(0xFFAB47BC), // Morado claro
+                        color: const Color(0xFFAB47BC), 
                       ),
                       labelStyle: GoogleFonts.lato(
                         fontSize: 16,
-                        color: const Color(0xFFAB47BC), // Morado claro
+                        color: const Color(0xFFAB47BC), 
                       ),
                     ),
                     keyboardType: TextInputType.emailAddress,

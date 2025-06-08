@@ -1,4 +1,3 @@
-// lib/screens/login_screen.dart
 import 'package:flutter/material.dart';
 import 'package:rally_app/screens/home_screen.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -253,7 +252,7 @@ class _LoginScreenState extends State<LoginScreen> {
     print('Construyendo LoginScreen');
     return BackgroundWidget(
       child: Scaffold(
-        backgroundColor: Colors.transparent, // Aseguramos que el Scaffold sea transparente
+        backgroundColor: Colors.transparent, 
         appBar: AppBar(
           title: Text(
             'Iniciar Sesión / Registrarse',
@@ -264,7 +263,7 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
           centerTitle: true,
         ),
-        body: Center( // Centra todos los componentes verticalmente
+        body: Center( 
           child: Padding(
             padding: const EdgeInsets.all(16.0),
             child: SingleChildScrollView(
@@ -278,15 +277,15 @@ class _LoginScreenState extends State<LoginScreen> {
                     }),
                     decoration: InputDecoration(
                       labelText: 'Email',
-                      hintText: 'ejemplo@rallyfoto.com', // Hint actualizado
+                      hintText: 'ejemplo@rallyfoto.com',
                       errorText: _emailError,
                       hintStyle: GoogleFonts.lato(
                         fontSize: 16,
-                        color: const Color(0xFFAB47BC), // Morado claro
+                        color: const Color(0xFFAB47BC), 
                       ),
                       labelStyle: GoogleFonts.lato(
                         fontSize: 16,
-                        color: const Color(0xFFAB47BC), // Morado claro
+                        color: const Color(0xFFAB47BC), 
                       ),
                     ),
                     keyboardType: TextInputType.emailAddress,
@@ -299,15 +298,15 @@ class _LoginScreenState extends State<LoginScreen> {
                     }),
                     decoration: InputDecoration(
                       labelText: 'Contraseña',
-                      hintText: 'Rally2025!', // Hint actualizado
+                      hintText: 'Rally2025!', 
                       errorText: _passwordError,
                       hintStyle: GoogleFonts.lato(
                         fontSize: 16,
-                        color: const Color(0xFFAB47BC), // Morado claro
+                        color: const Color(0xFFAB47BC), 
                       ),
                       labelStyle: GoogleFonts.lato(
                         fontSize: 16,
-                        color: const Color(0xFFAB47BC), // Morado claro
+                        color: const Color(0xFFAB47BC), 
                       ),
                     ),
                     obscureText: true,
@@ -320,15 +319,14 @@ class _LoginScreenState extends State<LoginScreen> {
                       }),
                       decoration: InputDecoration(
                         labelText: 'Repetir Contraseña',
-                        hintText: 'Rally2025!', // Hint actualizado
-                        errorText: _confirmPasswordError,
+                        hintText: 'Rally2025!', 
                         hintStyle: GoogleFonts.lato(
                           fontSize: 16,
-                          color: const Color(0xFFAB47BC), // Morado claro
+                          color: const Color(0xFFAB47BC), 
                         ),
                         labelStyle: GoogleFonts.lato(
                           fontSize: 16,
-                          color: const Color(0xFFAB47BC), // Morado claro
+                          color: const Color(0xFFAB47BC), 
                         ),
                       ),
                       obscureText: true,
@@ -341,15 +339,15 @@ class _LoginScreenState extends State<LoginScreen> {
                   TextButton(
                     onPressed: () => setState(() => _isRegistering = !_isRegistering),
                     style: TextButton.styleFrom(
-                      foregroundColor: const Color(0xFFAB47BC), // Morado claro
+                      foregroundColor: const Color(0xFFAB47BC), 
                     ),
                     child: Text(
                       _isRegistering
                           ? '¿Ya tienes cuenta? Inicia sesión'
                           : '¿No tienes cuenta? Regístrate',
                       style: GoogleFonts.lato(
-                        fontSize: 18, // Tamaño más grande
-                        fontWeight: FontWeight.bold, // Más destacado
+                        fontSize: 18, 
+                        fontWeight: FontWeight.bold, 
                       ),
                     ),
                   ),
@@ -362,13 +360,13 @@ class _LoginScreenState extends State<LoginScreen> {
                         );
                       },
                       style: TextButton.styleFrom(
-                        foregroundColor: const Color(0xFFAB47BC), // Morado claro
+                        foregroundColor: const Color(0xFFAB47BC), 
                       ),
                       child: Text(
                         '¿Olvidaste tu contraseña?',
                         style: GoogleFonts.lato(
-                          fontSize: 18, // Tamaño más grande
-                          fontWeight: FontWeight.bold, // Más destacado
+                          fontSize: 18, 
+                          fontWeight: FontWeight.bold, 
                         ),
                       ),
                     ),

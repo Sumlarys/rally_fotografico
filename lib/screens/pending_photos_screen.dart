@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../background_widget.dart';
 
 class PendingPhotosScreen extends StatefulWidget {
-  final VoidCallback? onPhotoApproved; // Hacer el callback opcional
+  final VoidCallback? onPhotoApproved;
 
   const PendingPhotosScreen({super.key, this.onPhotoApproved});
 
@@ -43,7 +43,7 @@ class _PendingPhotosScreenState extends State<PendingPhotosScreen> {
     print('Construyendo PendingPhotosScreen');
     return BackgroundWidget(
       child: Scaffold(
-        backgroundColor: Colors.transparent, // Aseguramos que el Scaffold sea transparente
+        backgroundColor: Colors.transparent, 
         appBar: AppBar(
           title: Text(
             'Fotos Pendientes',

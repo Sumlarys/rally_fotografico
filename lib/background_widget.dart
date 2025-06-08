@@ -10,7 +10,6 @@ class BackgroundWidget extends StatelessWidget {
     print('Intentando cargar la imagen de fondo desde assets/image.png');
     return Container(
       decoration: const BoxDecoration(
-        // Usamos un color sólido temporalmente para confirmar que el fondo se renderiza
         color: Colors.blueGrey, // Color de respaldo para depuración
         image: DecorationImage(
           image: AssetImage('assets/image.png'),
@@ -20,7 +19,7 @@ class BackgroundWidget extends StatelessWidget {
       ),
       child: Container(
         // Overlay semi-transparente para mejorar la legibilidad
-        color: Colors.black.withOpacity(0.1), // Reducimos aún más la opacidad para depuración
+        color: Colors.black.withOpacity(0.1), 
         child: child,
       ),
     );

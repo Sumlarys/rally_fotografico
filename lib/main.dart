@@ -28,12 +28,12 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.purple,
         colorScheme: const ColorScheme.light(
-          primary: Color(0xFF6A1B9A), // Morado oscuro
-          secondary: Color(0xFFAB47BC), // Lila
-          surface: Color(0xFFF3E5F5), // Fondo claro lila
+          primary: Color(0xFF6A1B9A), 
+          secondary: Color(0xFFAB47BC), 
+          surface: Color(0xFFF3E5F5), 
           onPrimary: Colors.white,
           onSecondary: Colors.white,
-          onSurface: Color(0xFF4A148C), // Texto morado oscuro
+          onSurface: Color(0xFF4A148C), 
         ),
         scaffoldBackgroundColor: Colors.transparent, // Fondo transparente para mostrar la imagen
         appBarTheme: const AppBarTheme(

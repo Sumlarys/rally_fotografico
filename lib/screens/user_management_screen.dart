@@ -1,10 +1,9 @@
-// lib/screens/user_management_screen.dart
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../background_widget.dart';
 
-// Configuración del token de servicio (reemplaza con tu Service Role Key)
+// Configuración del token de servicio
 const String serviceRoleKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhudW5ldmxubGdlb2NodW5idWJhIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc0OTE0NjY2NywiZXhwIjoyMDY0NzIyNjY3fQ.-rJG-7GBdvLr0ek04N-4UFuZWyIpWCqMuIl4trfJls8'; // ¡No comentes esto en producción!
 const String supabaseUrl = 'https://hnunevlnlgeochunbuba.supabase.co'; // URL de tu proyecto Supabase
 
@@ -235,7 +234,7 @@ class _UserManagementScreenState extends State<UserManagementScreen> {
           ),
           centerTitle: true,
         ),
-        body: Center( // Centra el contenido verticalmente
+        body: Center( 
           child: SingleChildScrollView(
             child: Column(
               children: [
@@ -284,7 +283,7 @@ class _UserManagementScreenState extends State<UserManagementScreen> {
                                         style: GoogleFonts.lato(
                                           fontSize: 18,
                                           fontWeight: FontWeight.bold,
-                                          color: const Color(0xFF6A1B9A), // Morado oscuro
+                                          color: const Color(0xFF6A1B9A), 
                                         ),
                                       ),
                                       const SizedBox(height: 4),
@@ -292,7 +291,7 @@ class _UserManagementScreenState extends State<UserManagementScreen> {
                                         'Rol: ${user['role']}',
                                         style: GoogleFonts.lato(
                                           fontSize: 16,
-                                          color: const Color(0xFFAB47BC), // Lila
+                                          color: const Color(0xFFAB47BC), 
                                         ),
                                       ),
                                     ],
