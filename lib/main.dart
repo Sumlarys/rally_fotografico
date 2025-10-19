@@ -62,10 +62,10 @@ class MyApp extends StatelessWidget {
             color: Color(0xFF4A148C),
           ),
         ),
-        cardTheme: CardTheme(
+        cardTheme: CardThemeData(
           elevation: 4.0,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12.0),
+            borderRadius: BorderRadius.all(Radius.circular(12.0)),
           ),
           color: Colors.white,
         ),
