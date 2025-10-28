@@ -6,8 +6,8 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   
   await Supabase.initialize(
-    url: 'https://hnunevlnlgeochunbuba.supabase.co',
-    anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhudW5ldmxubGdlb2NodW5idWJhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDkxNDY2NjcsImV4cCI6MjA2NDcyMjY2N30.KiuPY7JR2PUNy75OsTQSitRS07j0sXo-yc2YODJO3-4',
+    url: 'https://loomkgchrbacztrahbjr.supabase.co',
+    anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxvb21rZ2NocmJhY3p0cmFoYmpyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjE1ODU2MjksImV4cCI6MjA3NzE2MTYyOX0.9x3TbhQmDZ_0cg6K3yNHricTVkxJEiJa_K2dBS7xAms',
     authOptions: const FlutterAuthClientOptions(
       authFlowType: AuthFlowType.pkce,
       autoRefreshToken: true,
